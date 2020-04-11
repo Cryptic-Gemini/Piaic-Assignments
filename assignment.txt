@@ -1,0 +1,274 @@
+
+Assignment # 1 (Heroku + Portfolio)
+
+Portfolio Deployment On Heroku
+
+Note: The repo contains a portfolio resume that showcases examples of your work along with the usual resume information about your work experience. You can replace the content with your information.It was created with HTML, CSS and Javascript. It is lightweight and fully responsive, as well as comes with the Bootstrap.
+
+Task:
+
+1- Clone a project https://github.com/naveed-rana/docker-assignment.git
+2- Create Dockerfile for the application.
+3- Install heroku CLI using: ($ sudo snap install --classic heroku).
+4- After you install the CLI, run the heroku login command. ($ heroku login).
+5- Open your terminal in a folder where your Dockerfile exit & Log in to Container Registry: ($ heroku container:login).
+6- Create a Heroku app:  ($ heroku create app-name)
+7- Build the image and push to Container Registry: ($ heroku container:push web -a aap-name ).
+8- Release the image to your app: ($ heroku container:release web -a app-name)
+9- Open the app in your browser: ($ heroku open -a app-name)
+10- You will find your app running as: app-name.herokuapp.com
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Assignment # 2 (Firebase Hosting + Portfolio)
+
+Portfolio Deployment On Firebase Hosting
+
+Note: The repo contains a portfolio resume that showcases examples of your work along with the usual resume information about your work experience. You can replace the content with your information.It was created with HTML, CSS and Javascript. It is lightweight and fully responsive, as well as comes with the Bootstrap.
+
+Task:
+
+1- Make Google Firebase account.
+2- Install the Firebase CLI using the automatic install script: $ curl -sL https://firebase.tools | bash
+3- Clone an index.html file from https://github.com/Cryptic-Gemini/portfolio-sample.git
+4- Sign in to firebase.google.com using your Google account ,Click on Go to console and then click on Add project to create your Firebase project.
+5- Switch to the project directory and open the terminal to run the command: $firebase login
+6- Initialize your App : $firebase init
+7- Deploy app : $firebase deploy
+8- Copy Hosting URL and paste it in the browser to see your portfolio live.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Assignment #3 (Docker + Python)
+
+Dockerize python flask application.
+
+1- Clone the project https://github.com/Cryptic-Gemini/piaic-python-assigment.git
+2- Create a Dockerfile
+3- Bring up the Application in web browser at port 2020.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Assignment # 4 (Heroku + python + gunicorn)
+
+Deploying python app on Heroku using gunicorn.
+
+1- Clone the project https://github.com/Cryptic-Gemini/piaic-python-assigment.git
+2- Install heroku CLI using: $ sudo snap install --classic heroku
+3- Create a Procfile
+4- After you install the CLI, run the heroku login command. ($ heroku login).
+5- Initialize a local Git repository and commit your application code to it.
+6- Create a Heroku app:  ($ heroku create app-name)
+7- Add a remote to your local repository: $ heroku git:remote -a app-name
+8- Use the git push command to deploy your app on Heroku: $ git push heroku master 
+9- You will find your app running as:  https://app-name.herokuapp.com/
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Assignment # 5 (Docker Compose + python + uWSGI + nginx)
+
+Dockerize python flask application by setting up the uWSGI application server to launch the application and Nginx to act as a front end reverse proxy.
+
+1- Install Docker
+2- Install Docker Compose
+3- Clone the project https://github.com/Cryptic-Gemini/piaic-python-assigment.git
+4- Create two dockerfiles for flask & nginx.
+5- Create docker-compose.yaml file to startup multiple containers (flask and nginx) at the same time and automatically connect them together with some form of networking.
+6- Build the project (docker-compose up)
+7- Bring up the Application in web browser at port 2020.
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Assignment # 6 (Heroku + python + uWSGI + nginx)
+
+Python app (AI model) using uwsgi and nginx deployed on heroku
+
+1- Clone the project https://github.com/Cryptic-Gemini/piaic-python-assigment.git
+2- Install heroku CLI using: $ sudo snap install --classic heroku
+3- Set http-socket to :$(PORT) in uWSGI Configuration File
+4- Make a Procfile to start your uWSGI instance.
+5- After you install the CLI, run the heroku login command. ($ heroku login).
+6- Initialize a local Git repository and commit your application code to it.
+7- Create a Heroku app:  ($ heroku create app-name)
+8- Add a remote to your local repository: $ heroku git:remote -a app-name
+9- Use the git push command to deploy your app on Heroku: $ git push heroku master 
+10- You will find your app running as:  https://app-name.herokuapp.com/
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Assignment #7 (Docker Compose + Wordpress)
+
+Install Wordpress with Docker compose.
+
+1- Install Docker
+2- Install Docker Compose
+3- To setup Wordpress, create a docker-compose.yml file that starts your WordPress blog and a separate MySQL instance with a volume mount for data persistence.
+4- Build the project (docker-compose up)
+5- Bring up WordPress in a web browser at port 8000
+
+Helping material ==> https://docs.docker.com/compose/wordpress/
+                     https://www.linode.com/docs/quick-answers/linux/wordpress-with-docker-compose/
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+Assignment # 8(Configmap)
+
+(a)Dockerize python flask application by setting up the uWSGI application server to launch the application and Nginx to act as a front end reverse proxy.
+
+(b)Deploy in kubernetes Pod by using ConfigMap
+
+Requirements:
+
+Clone the application from https://github.com/Cryptic-Gemini/piaic-python-assigment.git
+
+1-Create Dockerfiles for each service to build images.
+
+2-Create docker-compose.yml to run multiple containers together.
+
+3-Deploy the entire stack with the docker-compose command.
+
+4-Pushing the docker images to the docker hub.
+
+5-Create a ConfigMap with the Nginx configuration file.
+
+6-Create a multi-container Pod (web app and Nginx in separate containers)
+
+7-Expose the Pod using nodePort service.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Assignment # 9 (init-containers)
+
+You are required to make a multicontainer pod (initcontainer & nginx) in which one container will pull the static content and other will serve that content.Init-container will pull the static website content from GitHub. The website exists as git repository at https://github.com/Praqma/simple-website.git or https://github.com/Cryptic-Gemini/portfolio-sample.git, we want to serve it through the nginx service.
+
+Note: It's just for practice.
+
+==> Make your yaml file.
+
+==> See your Pod in running status
+
+==> Make your Application running at port 7000. (kubectl port-forward pod-name 7000:80)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Assignment # 10 (secrets + ConfigMap)
+
+Task:
+----
+
+Run nginx web-server, which listens on port 443, by using some self-signed SSL certificates. This involves:
+
+a- Providing SSL certificates to nginx pods
+
+b- Providing a custom nginx configuration, so the pods know how to use these certificates and what port to listen on.
+
+
+Help:
+-----
+
+To achieve these objectives, we will create SSL certs as secrets, and a custom nginx configuration as configmap, and use them in our deployment.
+
+1- Generate self signed certs: (check support-files directory in https://github.com/Cryptic-Gemini/Self-signed-cert.git)
+
+                 ./generate-self-signed-certs.sh
+
+This will create tls.* files.
+
+2- Create (tls type) secret for nginx.
+
+3- Create a custom configuration for nginx.
+
+4- Create a nginx deployment with SSL support using the secret and config map you created in the previous steps.
+
+5- Expose it as a service of type NodePort
+
+ You will get two NodePorts as  443:31754/TCP,80:30925/TCP
+
+
+6- You should be able to see nginx running on browser through http and https.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+            
+
+Assignment#11 (sidecar = log shipper)
+
+Scenario:
+--------
+
+We have a web server container running the nginx image. The access and error logs produced by the web server are not critical enough to be placed on a persistent volume. However, developers need access to the last 24 hours of logs so they can trace issues and bugs. Therefore, we need to ship the access and error logs for the web server to a log-aggregation service. Following the separation of concerns principle, implement the Sidecar pattern by deploying a second container that ships the error and access logs from nginx. Nginx does one thing, and it does it well; serving web pages. The second container also specializes in its task; shipping logs. Since containers are running on the same Pod, we can use a shared emptyDir volume to read and write logs. 
+
+Task:
+-----
+
+Create a multi-container pod having nginx for serving web pages and sidecar container for shipping logs.
+
+1-Add a sidecar container to the nginx pod.
+2-Mount the pod scoped volume named logs into the sidecar, so same as nginx container does.
+3-Our sidecar should pipe the content of file access.log (that’s inside the volume logs because nginx container writes it there) to stdout.
+4-Check if you can access the logs of your sidecar using kubectl logs:  $kubectl logs pod-name sidecar-container-name
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------=
+
+Assignemnt #12 (ngrok + freenom)
+
+Task:
+-----
+
+a) By using Ngrok,create two sets of publicly available URLs that map to your local web server to make your local site looks like a staged or production website.
+
+b) Bind ngrok url with free domain from freenom
+
+Assignment help:
+---------------
+
+1-Run your app on some port say localhost:80 
+2-Then on another terminal window run ngrok ($ ngrok http 80)
+3-Ngrok will give you public url that can be used your system locally deployed website from any part of the world.
+5-Paste that url's on browser to see your app live on it.
+4-Buy a domain from Freenom and bind it with ngrok url.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
