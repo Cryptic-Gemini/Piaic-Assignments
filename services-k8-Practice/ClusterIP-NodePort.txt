@@ -1,0 +1,180 @@
+
+
+
+                                   ClusterIP & NodePort Hands-On Approach
+                                   ---------------------------------------
+
+
+How to make one pod to communicate with other pod with the IP that is exposed by kubectl get pods -o wide?
+
+
+I've made two pods ... one (nginx) and another (multitool ... that have networking tools in it )
+-------------------------------------------------------------------------------------------------
+
+                    kubectl run nginx --image=nginx:alpine
+
+                    kubectl run multitool --image=praqma/network-multitool
+
+Get the pods names with:
+------------------------
+
+                    kubectl get pods -o wide
+
+
+NAME                        READY   STATUS              RESTARTS   AGE     IP            NODE   NOMINATED NODE   READINESS GATES
+
+multitool-6d598c8f8-n9bnh   1/1     Running             0          108s    172.17.0.16   m01    <none>           <none>
+
+nginx-686449ff6b-p4rhq      1/1     Running             0          7m35s   172.17.0.14   m01    <none>           <none>
+
+
+
+Get into the multitool container:
+----------------------------------
+
+I used the exec command to get into the multitool container and tried to curl and ping the nginx through that IP and I got the response from 
+nginx.
+
+
+
+                     kubectl exec -it <multitool-podname> sh
+
+                     kubectl exec -it multitool-6d598c8f8-n9bnh sh
+
+
+                        #ifconfig
+
+                          /////////
+                         
+                          /////////
+
+
+                      # curl <nginx-ip>
+  
+                          /////////
+  
+                          /////////
+
+
+                        # ping <nginx-ip>
+
+                          /////////
+  
+                          /////////
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+But it is not a good practice as IP of nginx will change if kubernetes will make a new pod .So we will use service (Cluster-IP)
+
+Create a service (Cluster-IP)
+-----------------------------
+
+                kubectl expose deployment nginx --type ClusterIP --port 80
+
+
+This will create a service as ClusterIP:
+---------------------------------------
+
+                  kubectl get svc
+ 
+
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+
+kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP   23d
+
+nginx        ClusterIP   10.105.171.180   <none>        80/TCP    9s
+
+
+Now use the service to communicate to nginx.
+---------------------------------------------
+
+
+                 kubectl exec -it <multitool-podname> sh
+                 
+
+                kubectl exec -it multitool-6d598c8f8-n9bnh sh
+
+                 # ping < service-name >                         //service-name = nginx
+
+                 # curl <service-name>
+
+                 # dig nginx.default.svc.cluster.local
+
+
+Have a insight of the service by :
+----------------------------------
+
+                  kubectl describe svc nginx
+
+                   .....
+ 
+                   IP = <service-IP>
+
+                   TargetPort = <container-Port>
+
+                   Endpoints = <Pod-IP>
+
+                    ........
+ 
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ ==> Expose this with NodePort :
+      (Note : you have to delete the ClusterIP service first)
+
+                        kubectl expose deployment nginx --type NodePort --port 80
+
+This will create a service as NodePort:
+---------------------------------------
+
+                  kubectl get svc
+ 
+
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        23d
+
+nginx        NodePort    10.106.208.73   <none>        80:32494/TCP   53m
+
+
+Have a insight of the service by :
+---------------------------------
+
+                         kubectl describe svc nginx
+
+Name:                     nginx
+Namespace:                default
+Labels:                   run=nginx
+Annotations:              <none>
+Selector:                 run=nginx
+Type:                     NodePort
+IP:                       10.106.208.73
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  32494/TCP
+Endpoints:                172.17.0.14:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+
+
+Access on Browser:
+------------------
+
+           minikube Ip : NodePort
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Ref : KamranAzeem/kubernetes-katas
+
+
+
+
+
+
+    
+
